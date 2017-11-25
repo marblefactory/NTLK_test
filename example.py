@@ -3,21 +3,13 @@ import sys
 
 sentence = "Run down to room 6" if len(sys.argv) == 1 else sys.argv[1]
 
-print("SENTENCE: " + sentence)
-
-tokens = nltk.word_tokenize(sentence)
-print("TOKENS: " + str(tokens))
-
-tagged = nltk.pos_tag(tokens)
-print("TAGS: " + str(tagged))
-
 
 def get_obj_name(text: str) -> str:
     """
     :param text: the text the user spoke.
     :return: the name of the object the user is referring to.
     """
-    tokens = nltk.word_tokenize(sentence)
+    tokens = nltk.word_tokenize(text)
     tagged = nltk.pos_tag(tokens)
     nouns = [(i, word) for i, (word, tag) in enumerate(tagged) if tag == 'NN']
 
@@ -32,5 +24,6 @@ def get_obj_name(text: str) -> str:
         return 'room ' + room_name
 
     return noun
+
 
 print('PLACE: ' + get_obj_name(sentence))
